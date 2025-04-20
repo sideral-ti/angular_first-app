@@ -1,5 +1,95 @@
-<h1 class="titulo">Hello, {{ title }}   with Sideral TI</h1>
+<!-- app.component.html 
+<app-navbar></app-navbar>
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>
+<h1 class="titulo">Hello, {{ title }}   with Sideral TI</h1>-->
 
-<h2 class="slogan_index"> {{slogan}} </h2>
+<button (click)="setVisible()">
+    {{visible ? 'Ocultar' : 'Mostrar'}} 
+</button>
 
-<p class="descipcion-index"> {{description}} </p>
+@if (visible) {
+
+    <h1 class="text-warning">Hello, {{ title }}   with Sideral TI</h1>
+
+    <h2 class="slogan_index"> {{slogan}} </h2>
+
+    <p class="descipcion-index"> {{description}} </p>
+
+    <div>Total: {{counter}} </div>
+
+    @if (users != undefined && users.length > 0) {
+  <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (user of users; track $index) {
+                <tr>
+                    <td> {{ $index + 1 }} </td>
+                    <td> {{ user }} </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    } @else {
+        <div>
+            No existe registro en la tabla del sistema
+        </div>
+    }
+  
+  
+} @else {
+    <h2>No existe registro en el sistema, no visible</h2>
+}
+
+<app-counter [title]="subTitle" (counterEmmit)="setCounter($event)"></app-counter>
+
+
+
+
+
+<!--
+<div *ngIf="visible; else notEnable">
+        <h1 class="text-warning">Hello, {{ title }}   with Sideral TI</h1>
+
+        <h2 class="slogan_index"> {{slogan}} </h2>
+
+        <p class="descipcion-index"> {{description}} </p>
+</div>
+
+<button (click)="setVisible()">
+    {{visible ? 'Ocultar' : 'Mostrar'}} 
+</button>
+
+<div *ngIf="visible">
+    <table *ngIf="(users != undefined && users.length > 0) else isEmpty" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; index as i">
+                <td> {{ i + 1 }} </td>
+                <td> {{ user }} </td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #isEmpty>
+        <div>
+            No existe registro en el sistema
+        </div>
+    </ng-template>
+</div>
+
+<ng-template #notEnable>
+    <h2>No existe registro en el sistema, no visible</h2>
+</ng-template>
+
+-->
